@@ -34,9 +34,8 @@ App({
       })
     }
     
-    if(wx.getStorageSync('userId')) {
-      this.webSocketConnect()
-    }
+
+    
 
     // getAllCampus().then(res => {
     //   if(res.data && res.data.code && res.data.code === 3200) {
@@ -46,6 +45,7 @@ App({
     //     wx.setStorageSync('minPrice', address.campusMinPrice)
     //   }
     // })
+    this.webSocketConnect()
     
     wx.getSystemInfo({
       success: e => {
@@ -130,20 +130,24 @@ App({
     phoneNum: null,
     token: null
   },
-  webSocketConnect(uid = wx.getStorageSync('userId'), identity, lastestOrderDate) {
-    wx.connectSocket({
-      url: 'wss://www.sijie666.com:58080/ws',
-      timeout: 50000,
-      header: {
-        'content-type': 'application/json'
-      },
-      success: (res) => {
-        console.log('connect',res);
-        this.webSocketOpen(uid, identity = 'user', lastestOrderDate)
-      },
-      fail: (res) => {
-      }
-    })
+  async webSocketConnect(uid = wx.getStorageSync('userId'), identity, lastestOrderDate) {
+    await this.webSocketClose()
+    if(wx.getStorageSync('userId')) {
+      wx.connectSocket({
+        url: 'wss://www.sijie666.com:58080/ws',
+        timeout: 50000,
+        header: {
+          'content-type': 'application/json'
+        },
+        success: (res) => {
+          console.log('connect',res);
+          this.webSocketOpen(uid, identity = 'user', lastestOrderDate)
+        },
+        fail: (res) => {
+        }
+      })
+    }
+
   },
   webSendSocketMessage(uid, identity, lastestOrderDate) {
     if(lastestOrderDate){
@@ -189,8 +193,8 @@ App({
     })
   },
   webSocketClose() {
-    wx.onSocketClose((result) => { 
-      console.log(result);
+    wx.onSocketClose((res) => { 
+      console.log('close');
     })
   }
 })
