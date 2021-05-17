@@ -1,4 +1,8 @@
 // pages/WCH/remarks/remarks.js
+import {
+  BASE_URL
+} from '../../../service/config'
+
 Page({
   data: {
     // 单选标签
@@ -142,6 +146,13 @@ Page({
         remark: remark
       })
       wx.navigateBack()
+    }
+  },
+  onShareAppMessage(options) {
+    return {
+      title: '啰咪校园',
+      path: '/pages/WCH/home/home',
+      imageUrl: BASE_URL + '/images/logo.png'
     }
   }
 })

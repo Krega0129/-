@@ -281,7 +281,7 @@ Page({
           oldCart.foodList = []
          
         }else {
-          showToast(res.data.msg)
+          showToast('下单失败：' + res.data.msg)
         }
       })
     }

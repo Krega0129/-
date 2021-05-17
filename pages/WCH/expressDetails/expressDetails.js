@@ -3,6 +3,9 @@ import {
   cancelExpressOrder
 } from '../../../service/express'
 import { showToast } from '../../../utils/util'
+import {
+  BASE_URL
+} from '../../../service/config'
 
 Page({
   data: {
@@ -86,5 +89,12 @@ Page({
         showToast('复制失败')
       }
     })
+  },
+  onShareAppMessage(options) {
+    return {
+      title: '啰咪校园',
+      path: '/pages/WCH/home/home',
+      imageUrl: BASE_URL + '/images/logo.png'
+    }
   }
 })

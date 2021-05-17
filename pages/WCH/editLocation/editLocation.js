@@ -7,7 +7,8 @@ import {
 } from '../../../service/bill'
 
 import {
-  H_config
+  H_config,
+  BASE_URL
 } from '../../../service/config'
 
 import {
@@ -171,5 +172,12 @@ Page({
         }
       }
     })
+  },
+  onShareAppMessage(options) {
+    return {
+      title: '啰咪校园',
+      path: '/pages/WCH/home/home',
+      imageUrl: BASE_URL + '/images/logo.png'
+    }
   }
 })

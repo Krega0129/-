@@ -619,6 +619,8 @@ Page({
     })
   },
   chooseTag(e) {
+    console.log(this.data.foodDetails);
+    
     // 第几个规格数组
     const index = e.currentTarget.dataset.index
     // 数组中第几个规格
@@ -638,6 +640,7 @@ Page({
       foodDetails: this.data.foodDetails,
       specificationList: this.data.specificationList
     })
+    
   },
   addSpecification() {
     // 规格列表
@@ -682,6 +685,7 @@ Page({
     }
     // 将选中的价格放在对象中
     this.data.foodDetails.attributePrice = price
+    this.data.foodDetails.singlePrice = (this.data.foodDetails.price + this.data.foodDetails.attributePrice).toFixed(2)
   },
   checkCer() {
     shopIdGetShopLicense({
@@ -712,5 +716,12 @@ Page({
   _previewImage(e) {
     // previewImage(e.currentTarget.dataset.imgurl)
     previewImage(this.data.licenseImg, e.currentTarget.dataset.imgurl)
+  },
+  onShareAppMessage(options) {
+    return {
+      title: '啰咪校园',
+      path: '/pages/WCH/home/home',
+      imageUrl: BASE_URL + '/images/logo.png'
+    }
   }
 })

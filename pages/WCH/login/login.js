@@ -61,5 +61,12 @@ Page({
         console.log(err);
       })
     }
+  },
+  onShareAppMessage(options) {
+    return {
+      title: '啰咪校园',
+      path: '/pages/WCH/home/home',
+      imageUrl: BASE_URL + '/images/logo.png'
+    }
   }
 })

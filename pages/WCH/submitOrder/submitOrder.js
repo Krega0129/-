@@ -2,7 +2,8 @@
 const app = getApp()
 
 import {
-  H_config
+  H_config,
+  BASE_URL
 } from '../../../service/config'
 
 import {
@@ -261,5 +262,12 @@ Page({
         showToast('申请失败')
       }
     })
+  },
+  onShareAppMessage(options) {
+    return {
+      title: '啰咪校园',
+      path: '/pages/WCH/home/home',
+      imageUrl: BASE_URL + '/images/logo.png'
+    }
   }
 })

@@ -10,7 +10,10 @@ import {
 import {
   getAllAddressByCampus
 } from '../../../service/bill'
-import { H_config } from '../../../service/config'
+import { 
+  H_config,
+  BASE_URL
+} from '../../../service/config'
 import {
   showToast
 } from '../../../utils/util'
@@ -328,4 +331,11 @@ Page({
       triggered: false
     })
   },
+  onShareAppMessage(options) {
+    return {
+      title: '啰咪校园',
+      path: '/pages/WCH/home/home',
+      imageUrl: BASE_URL + '/images/logo.png'
+    }
+  }
 })

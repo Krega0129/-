@@ -1,5 +1,8 @@
 // pages/orderDetails/orderDetails.js
 import{loadingOn,loadingOff}from '../../../utils/util'
+import {
+  BASE_URL
+} from '../../../service/config'
 Page({
 
   /**
@@ -197,7 +200,11 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
+  onShareAppMessage(options) {
+    return {
+      title: '啰咪校园',
+      path: '/pages/WCH/home/home',
+      imageUrl: BASE_URL + '/images/logo.png'
+    }
   }
 })

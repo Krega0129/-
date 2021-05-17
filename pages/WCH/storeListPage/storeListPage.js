@@ -7,6 +7,10 @@ import {
   getAllCampus
 } from '../../../service/home'
 
+import {
+  BASE_URL
+} from '../../../service/config'
+
 const BACK_TOP = 500
 
 const app = getApp()
@@ -176,5 +180,12 @@ Page({
         triggered: false
       })
     })
+  },
+  onShareAppMessage(options) {
+    return {
+      title: '啰咪校园',
+      path: '/pages/WCH/home/home',
+      imageUrl: BASE_URL + '/images/logo.png'
+    }
   }
 })

@@ -3,6 +3,10 @@ import {
   getCampus
 } from '../../../service/home'
 
+import {
+  BASE_URL
+} from '../../../service/config'
+
 const BACK_TOP = 500
 
 Page({
@@ -150,5 +154,12 @@ Page({
         triggered: false
       })
     })
+  },
+  onShareAppMessage(options) {
+    return {
+      title: '啰咪校园',
+      path: '/pages/WCH/home/home',
+      imageUrl: BASE_URL + '/images/logo.png'
+    }
   }
 })
