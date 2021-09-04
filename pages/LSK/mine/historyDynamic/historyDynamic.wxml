@@ -76,7 +76,7 @@
             <view class="flex align-center" catchtap="likeClick" data-id="{{item.shareId}}"
               data-islike="{{item.isLike}}">
               <view class="{{item.isLike?'heart-active':'like'}}"
-                style="background-image:url('https://www.sijie666.com:8080/images/1bd83bc1-00eb-4469-9f14-8575a77fc60e.png');transform:scale(3.2);background-position: left;background-size: cover;">
+                style="background-image:url('https://www.sijie666.com:8080/images/45c89078-68f4-4f35-a2c1-87213e1acfb3.png');transform:scale(3.2);background-position: left;background-size: cover;">
               </view>
               <view class="text-lg margin-left-xs  {{item.isLike?'text-red':'text-gray'}}">{{item.likeNumber}}</view>
             </view>

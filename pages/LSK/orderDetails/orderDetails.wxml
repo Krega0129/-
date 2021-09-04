@@ -78,6 +78,7 @@
       <view class="padding-tb text-black text-bold solid-bottom"><text>配送信息</text></view>
       <view class=" padding-tb solid-bottom flex justify-between"><text>送达时间</text>
         <text class="text-gray" wx:if="{{orderDetails.status===5}}">{{orderDetails.completeTime}}</text>
+        <text class="text-gray" wx:elif="{{orderDetails.status===6}}">已退款</text>
         <text class="text-gray" wx:else="{{orderDetails.status}}">订单进行中</text>
       </view>
       <view class=" padding-tb solid-bottom flex justify-between"><text>收货地址</text>

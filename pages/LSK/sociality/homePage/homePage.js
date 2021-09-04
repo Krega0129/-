@@ -55,7 +55,7 @@ Page({
   tapBanner(e) {
     this.setData({
       showImg: true,
-      imgUrl: e.currentTarget.dataset.url
+      imgUrl: BASE_URL + '/' + e.currentTarget.dataset.url
     })
   },
   hideImg() {

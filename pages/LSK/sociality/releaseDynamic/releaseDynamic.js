@@ -131,8 +131,8 @@ Page({
             shareContent:this.data.shareContent,
             shareAddress: this.data.localCampus
           }).then((res) => {
+            loadingOff()   
             showToast('发布成功，请等待管理员审核',1000)
-            loadingOff()     
           })      
           wx.navigateBack()
         }else{
