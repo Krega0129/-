@@ -63,7 +63,7 @@
     </view>
     <view class="padding-top-sm">
       <w-category-item bindtap="takeExpress">
-        <image slot="img" src="../../../assets/img/WCH/category/快递代拿.jpg" style="width: 80rpx; height: 80rpx;"></image>
+        <image slot="img" src="{{BASE_URL + '/images/a8.png'}}" style="width: 80rpx; height: 80rpx;"></image>
         <text slot="title">快递代拿</text>
       </w-category-item>
     </view>
