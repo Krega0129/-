@@ -57,13 +57,13 @@
   <view class="grid col-4 padding-tb-sm text-center bg-white padding-lr">
     <view class="padding-top-sm" wx:for="{{categoryList}}" wx:key="index">
       <w-category-item data-title="{{item.categoryName}}" bindtap="tapCategory">
-        <image slot="img" src="{{item.img}}" style="width: 80rpx; height: 80rpx; border-radius: 50%"></image>
+        <image slot="img" src="{{item.img}}" style="width: 80rpx; height: 80rpx;"></image>
         <text slot="title">{{item.categoryName}}</text>
       </w-category-item>
     </view>
     <view class="padding-top-sm">
       <w-category-item bindtap="takeExpress">
-        <image slot="img" src="../../../assets/img/WCH/category/快递代拿.jpg" style="width: 80rpx; height: 80rpx; border-radius: 50%"></image>
+        <image slot="img" src="{{BASE_URL + '/images/a8.png'}}" style="width: 80rpx; height: 80rpx;"></image>
         <text slot="title">快递代拿</text>
       </w-category-item>
     </view>
