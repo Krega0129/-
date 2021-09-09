@@ -69,23 +69,20 @@ Page({
     this.data.hasChange = true
   },
   saveLocation() {
-    if(/^1\d{10}$/.test(this.data.user.contactPhone)) {
+    if(/^1\d{10}$/.test(this.data.user.contactPhone.trim())) {
       if(this.data.addNewAddress) {
-        const reg = /^(?:[\u4e00-\u9fa5·0-9]{2,6})$/
-        const reg1 = /^(?:[\u4e00-\u9fa5A-Za-z0-9]{2,10})$/
-        
-        if(!reg.test(this.data.user.contactName)) {
-          showToast('姓名格式错误，请输入2-6个中文')
-        } else if(!reg1.test(this.data.user.detailedAddress)) {
-          showToast('详细地址只能是2-10个字符')
+        if(this.data.user.contactName.trim().length > 20) {
+          showToast('姓名必须要在20个字以内')
+        } else if(this.data.user.detailedAddress.trim().length > 30) {
+          showToast('详细地址必须要在30个字以内')
         } else {
           addNewAddress({
             userId: wx.getStorageSync('userId'),
             campus: this.data.user.campus,
-            contactName: this.data.user.contactName,
+            contactName: this.data.user.contactName.trim(),
             sex: this.data.user.sex,
             contactPhone: this.data.user.contactPhone,
-            detailedAddress: this.data.user.detailedAddress,
+            detailedAddress: this.data.user.detailedAddress.trim(),
             isDefault: Number(this.data.user.isDefault)
           }).then(res => {
             if(res && res.data && res.data.code === H_config.STATECODE_addNewAddress_SUCCESS) {
