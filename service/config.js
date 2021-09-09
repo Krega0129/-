@@ -191,9 +191,11 @@ H_config.API_payExpress_URL = '/wechatpay/agentPre'
 
 H_config.API_cancelExpressOrder_URL = '/expressAgent/cancelOrder'
 
+const API_WEBSOCKET_URL = 'wss://www.sijie666.com:58080/ws'
 // 改成对象
 export {
   BASE_URL,
   H_config,
-  K_config
+  K_config,
+  API_WEBSOCKET_URL
 }

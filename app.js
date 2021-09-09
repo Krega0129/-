@@ -7,8 +7,11 @@ import {
   loginByTourist
 } from './service/touristLogin'
 import {
-  K_config
+  K_config,
+  API_WEBSOCKET_URL
 } from './service/config'
+import { showToast } from './utils/util'
+import { HeartBeat } from './utils/heartBeat'
 App({
   onLaunch: function () {
     this.globalData.bus=bus
@@ -45,7 +48,7 @@ App({
     //     wx.setStorageSync('minPrice', address.campusMinPrice)
     //   }
     // })
-    this.webSocketConnect()
+    this.wsConnect()
     
     wx.getSystemInfo({
       success: e => {
@@ -130,71 +133,84 @@ App({
     phoneNum: null,
     token: null
   },
-  async webSocketConnect(uid = wx.getStorageSync('userId'), identity, lastestOrderDate) {
-    await this.webSocketClose()
-    if(wx.getStorageSync('userId')) {
-      wx.connectSocket({
-        url: 'wss://www.sijie666.com:58080/ws',
-        timeout: 50000,
-        header: {
-          'content-type': 'application/json'
-        },
-        success: (res) => {
-          console.log('connect',res);
-          this.webSocketOpen(uid, identity = 'user', lastestOrderDate)
-        },
-        fail: (res) => {
-        }
-      })
-    }
+  // async webSocketConnect(uid = wx.getStorageSync('userId'), identity, lastestOrderDate) {
+  //   await this.webSocketClose()
+  //   if(wx.getStorageSync('userId')) {
+  //     wx.connectSocket({
+  //       url: 'wss://www.sijie666.com:58080/ws',
+  //       timeout: 50000,
+  //       header: {
+  //         'content-type': 'application/json'
+  //       },
+  //       success: (res) => {
+  //         console.log('connect',res);
+  //         this.webSocketOpen(uid, identity = 'user', lastestOrderDate)
+  //       },
+  //       fail: (res) => {
+  //       }
+  //     })
+  //   }
 
-  },
-  webSendSocketMessage(uid, identity, lastestOrderDate) {
-    if(lastestOrderDate){
-      wx.sendSocketMessage({
-        data: JSON.stringify({
-          uid,
-          identity,
-          lastestOrderDate
-        }),
-        success: res => {
-          console.log('send',res);
-          this.webGetSocketMessage()
-        }
-      })
-    }
-    else{
-      wx.sendSocketMessage({
-        data: JSON.stringify({
-          uid,
-          identity,
-        }),
-        success: res => {
-          console.log('send',res);
-          this.webGetSocketMessage()
-        }
-      })
-    }
-  },
-  webGetSocketMessage() {      
-    wx.onSocketMessage((res) => {
-    // const a=JSON.parse(res.data)
-    console.log(res.data);
+  // },
+  // webSendSocketMessage(uid, identity, lastestOrderDate) {
+  //   if(lastestOrderDate){
+  //     wx.sendSocketMessage({
+  //       data: JSON.stringify({
+  //         uid,
+  //         identity,
+  //         lastestOrderDate
+  //       }),
+  //       success: res => {
+  //         console.log('send',res);
+  //         this.webGetSocketMessage()
+  //       }
+  //     })
+  //   }
+  //   else{
+  //     wx.sendSocketMessage({
+  //       data: JSON.stringify({
+  //         uid,
+  //         identity,
+  //       }),
+  //       success: res => {
+  //         console.log('send',res);
+  //         this.webGetSocketMessage()
+  //       }
+  //     })
+  //   }
+  // },
+  // webGetSocketMessage() {      
+  //   wx.onSocketMessage((res) => {
+  //   // const a=JSON.parse(res.data)
+  //   console.log(res.data);
     
-      if(res.data!=="服务器连接成功！"){
-        let orderMsg=JSON.parse(res.data)
-        bus.emit('orderMsg',orderMsg)
-      }
-    })
+  //     if(res.data!=="服务器连接成功！"){
+  //       let orderMsg=JSON.parse(res.data)
+  //       bus.emit('orderMsg',orderMsg)
+  //     }
+  //   })
+  // },
+  // webSocketOpen(uid, identity, lastestOrderDate) {
+  //   wx.onSocketOpen((res) => {
+  //     this.webSendSocketMessage(uid, identity, lastestOrderDate)
+  //   })
+  // },
+  // webSocketClose() {
+  //   wx.onSocketClose((res) => { 
+  //     console.log('close');
+  //   })
+  // }
+  getMessageCb(res) {
+    let orderMsg = {}
+    if(res.data != '服务器连接成功！') {
+      orderMsg = JSON.parse(res.data)
+      bus.emit('orderMsg',orderMsg)
+      showToast('订单状态发生改变', 1500)
+    }
   },
-  webSocketOpen(uid, identity, lastestOrderDate) {
-    wx.onSocketOpen((res) => {
-      this.webSendSocketMessage(uid, identity, lastestOrderDate)
-    })
-  },
-  webSocketClose() {
-    wx.onSocketClose((res) => { 
-      console.log('close');
-    })
+  wsConnect() {
+    if(wx.getStorageSync('userId')) {
+      this.globalData.ws = new HeartBeat(API_WEBSOCKET_URL, this.getMessageCb, {uid: wx.getStorageSync('userId'),identity: 'user'}, 'ping')
+    }
   }
 })

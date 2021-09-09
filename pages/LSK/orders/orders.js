@@ -558,7 +558,9 @@ Page({
       
       const that = this
       bus.on('orderMsg', function (orderMsg) {
-        showToast('有订单信息发生改变', 2000)
+        if(orderMsg.currentStatus > 2) {
+          showToast('有订单信息发生改变', 2000)
+        }
         let obligationList = that.data.obligationList
         console.log(obligationList);
         let paidList = that.data.paidList
@@ -590,9 +592,10 @@ Page({
         }
         else {
           for (let index = 0; index < obligationList.length; index++) {
+            this.setSelectUserPaidOrder()
             if (orderMsg.orderNumber === obligationList[index].orderNumber) {
               obligationList.splice(index - 1, 1)
-              return
+              
             }
           }
         }

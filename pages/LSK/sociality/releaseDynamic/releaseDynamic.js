@@ -104,7 +104,10 @@ Page({
           showToast('发布成功，请等待管理员审核',1000)
           loadingOff()
         })
-        wx.navigateBack()
+        setTimeout(() => {
+          wx.navigateBack()
+        }, 1000);
+        
       },
       fail: function (res) {
         showToast('图片上传失败，请检查网络')
