@@ -205,7 +205,7 @@ App({
     if(res.data != '服务器连接成功！') {
       orderMsg = JSON.parse(res.data)
       bus.emit('orderMsg',orderMsg)
-      showToast('订单状态发生改变', 1500)
+      // showToast('订单状态发生改变', 1500)
     }
   },
   wsConnect() {

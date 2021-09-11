@@ -27,6 +27,12 @@ export function selectUserOrder(data) {
   })
 }
 
+export function getOrderNumber() {
+  return request({
+    url: H_config.API_getOrderNumber_URL
+  })
+}
+
 export function payExpress(data) {
   return request({
     url: H_config.API_payExpress_URL,

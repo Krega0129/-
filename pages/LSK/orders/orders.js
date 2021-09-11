@@ -591,13 +591,12 @@ Page({
           orderItem.statusCode = '待送达'
         }
         else {
-          for (let index = 0; index < obligationList.length; index++) {
-            this.setSelectUserPaidOrder()
-            if (orderMsg.orderNumber === obligationList[index].orderNumber) {
-              obligationList.splice(index - 1, 1)
-              
-            }
-          }
+          that.setSelectUserPaidOrder()
+          // for (let index = 0; index < obligationList.length; index++) {
+          //   if (orderMsg.orderNumber === obligationList[index].orderNumber) {
+          //     obligationList.splice(index - 1, 1)
+          //   }
+          // }
         }
         that.setData({
           obligationList: obligationList,

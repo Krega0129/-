@@ -5,7 +5,8 @@ import {
   submitNewForm,
   selectUserOrder,
   payExpress,
-  cancelExpressOrder
+  cancelExpressOrder,
+  getOrderNumber
 } from '../../../service/express'
 import {
   getAllAddressByCampus
@@ -150,69 +151,73 @@ Page({
     } else if(Object.values(expressAgent).indexOf('') !== -1) {
       showToast('内容不能为空')
     } else {
-      submitNewForm(expressAgent).then(res => {
-        console.log(res);
-        
-        if(res.data.code === H_config.STATECODE_express_SUCCESS) {
+      getOrderNumber().then(res => {
+        if(res.data.code === 3200) {
+          console.log(res);
           this.setData({
-            orderNum: res.data.data.orderNumber
+            orderNum: res.data.data
           })
-          payExpress({
-            distributionFee: res.data.data.distributionFee,
-            orderNumber: res.data.data.orderNumber,
-            riderProfit: res.data.data.riderProfit,
-            userId: wx.getStorageSync('userId')
-          }).then(result => {
-            if (result.data.prepayId != ''){
-              const map = result.data.data
-              wx.requestPayment({
-                'appId': map.appId,
-                'timeStamp': map.timeStamp,
-                'nonceStr': map.nonceStr,
-                'package': map.package,
-                'signType': 'MD5',
-                'paySign': map.paySign,
-                'success':  (response) => {
-                  if(response.errMsg === 'requestPayment:ok') {
-                    console.log('支付了');
-                    this.setData({
-                      TabIndex: 1
-                    })
-                    this._selectUserOrder()
-                    wx.showToast({
-                      title: '支付成功！',
-                    })
-                  }
-                },
-                'fail': () => {
-                  console.log('取消支付了');
-                  this.cancelOrder(res.data.data.id)
-                  wx.showToast({
-                    title: '支付已取消！',
-                    icon: 'error'
-                  })
-                },
-                complete: () => {
-                  this.setData({
-                    chooseLocation: false,
-                    user: {},
-                    expressContent: '',
-                    pickUpAddress: '',
-                    pickUpCode: '',
-                    expressType: '',
+          return res.data.data
+        }
+      }).then((oN) => {
+        payExpress({
+          distributionFee: this.data.distributionFee,
+          orderNumber: this.data.orderNum,
+          // riderProfit: res.data.data.riderProfit,
+          userId: wx.getStorageSync('userId')
+        }).then(result => {
+          if (result.data.prepayId != ''){
+            const map = result.data.data
+            wx.requestPayment({
+              'appId': map.appId,
+              'timeStamp': map.timeStamp,
+              'nonceStr': map.nonceStr,
+              'package': map.package,
+              'signType': 'MD5',
+              'paySign': map.paySign,
+              'success':  (response) => {
+                if(response.errMsg === 'requestPayment:ok') {
+                  submitNewForm({...expressAgent, orderNumber: oN}).then(res => {
+                    if(res.data.code === H_config.STATECODE_express_SUCCESS) {
+                      this.setData({
+                        TabIndex: 1
+                      })
+                      this._selectUserOrder()
+                      wx.showToast({
+                        title: '支付成功！',
+                      })
+                    } else {
+                      showToast('提交失败')
+                    }
                   })
                 }
-              })
-            } else {
-              showToast('下单失败，请重试！')
-            }
-              wx.showToast({
-                title: '提交成功',
-              })
+              },
+              'fail': () => {
+                console.log('取消支付了');
+                this.cancelOrder(res.data.data.id)
+                wx.showToast({
+                  title: '支付已取消！',
+                  icon: 'error'
+                })
+              },
+              complete: () => {
+                this.setData({
+                  chooseLocation: false,
+                  user: {},
+                  expressContent: '',
+                  pickUpAddress: '',
+                  pickUpCode: '',
+                  expressType: '',
+                })
+              }
             })
-        } else {
-          showToast('提交失败')
-        }
+          } else {
+            showToast('下单失败，请重试！')
+          }
+          wx.showToast({
+            title: '提交成功',
+          })
+        })
       })
     }
   },

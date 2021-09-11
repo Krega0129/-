@@ -189,6 +189,8 @@ H_config.API_selectUserOrder_URL = '/expressAgent/selectUserOrder'
 H_config.API_payExpress_URL = '/wechatpay/agentPre'
 // H_config.STATECODE_addNewAddress_SUCCESS = 
 
+H_config.API_getOrderNumber_URL = '/expressAgent/getOrderNumber'
+
 H_config.API_cancelExpressOrder_URL = '/expressAgent/cancelOrder'
 
 const API_WEBSOCKET_URL = 'wss://www.sijie666.com:58080/ws'

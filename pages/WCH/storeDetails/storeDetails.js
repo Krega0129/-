@@ -181,6 +181,7 @@ Page({
         }).then(() => {
           // 加载购物车
           if(this.data.cartList[0]) {
+            console.log(this.data.cartList);
             for(let item of this.data.goodsCategoryList) {
               for(let food of this.data.cartList) {
                 let cartFood = item.foodsList.find(goods => goods.id === food.id)

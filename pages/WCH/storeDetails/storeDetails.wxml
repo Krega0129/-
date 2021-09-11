@@ -284,7 +284,7 @@
                 <!-- <view class="cu-tag round bg-orange sm">标签</view> -->
               </view>
               <view style="height: 60rpx; line-height: 60rpx">
-                <text class="text-price text-red text-bold">{{item.price + (item.attrPrice?item.attrPrice:0)}}</text>
+                <text class="text-price text-red text-bold">{{item.singlePrice}}</text>
                 <text wx:if="{{item.specification[0]}}" class="cu-tag margin-left">{{item.spec}}</text>
               </view>
             </view>
