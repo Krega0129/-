@@ -32,8 +32,10 @@ Page({
           deleteDynamicById({
             shareId: this.data.dynamicDetails.shareId
           }).then((res) => {
-            loadingOff()
+            
             if (res.data.code === K_config.STATECODE_SUCCESS || res.data.code === K_config.STATECODE_deleteDynamic_SUCCESS) {
+              
+              loadingOff()
               let pages = getCurrentPages();
               let prevPage = null; //上一个页面
               if (pages.length >= 2) {
@@ -49,9 +51,12 @@ Page({
                 prevPage.refreshPage();
               }
               showToast('删除成功', 1000)
-              wx.navigateBack({         //返回上一页  
-                delta: 1
-              })
+              setTimeout(() => {
+                wx.navigateBack({         //返回上一页  
+                 delta: 1
+               })
+              }, 1000);
+              
             }
           })
         }

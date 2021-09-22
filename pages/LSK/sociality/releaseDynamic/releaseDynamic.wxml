@@ -5,9 +5,9 @@
 </cu-custom>
 <form bindsubmit="submitDynamic">
   <view class="cu-form-group">
-    <textarea  maxlength="{{max}}" disabled="{{modalName!=null}}" placeholder="分享这一刻的心情~" name="shareContent" value="{{textareaAValue}}"
-      bindinput="inputNum"
-      style="height:250rpx"><text class="text-gray" style="position:absolute;bottom:0;right:0">{{num}}/{{max}}</text></textarea>
+    <textarea  disabled="{{modalName!=null}}" placeholder="分享这一刻的心情~" name="shareContent" value="{{textareaAValue}}"
+      bindinput="inputNum"  maxlength = '-1'
+      style="height:400rpx"><text class="text-gray" style="position:absolute;bottom:0;right:0"><text class="{{num > max ? 'red' : ''}}">{{num}}</text>/{{max}}</text></textarea>
   </view>
   <!-- <view class="padding-lr">
     <button class="cu-btn bg-red lg" style="width:690rpx" form-type="submit">提交建议</button>

@@ -52,9 +52,9 @@
             </view>
           </view>
         </view>
-        <view class=" margin-left">
+        <view class=" margin-lr ">
           <view style="position:relative">
-            <view class="padding-top">
+            <view class="padding-top" style="word-break: break-word">
               <text>{{item.shareContent}}</text>
             </view>
             <button class="cu-btn round bg-white button-hover noStyle margin-top-xs"
@@ -102,9 +102,9 @@
             </view>
           </view>
         </view>
-        <view class=" margin-left">
+        <view class=" margin-lr">
           <view style="position:relative">
-            <view class="padding-top">
+            <view class="padding-top" style="word-break: break-word">
               <text>{{item.shareContent}}</text>
             </view>
             <button class="cu-btn round bg-white button-hover noStyle margin-top-xs"
@@ -149,9 +149,9 @@
             </view>
           </view>
         </view>
-        <view class=" margin-left">
+        <view class=" margin-lr">
           <view style="position:relative">
-            <view class="padding-top">
+            <view class="padding-top" style="word-break: break-word">
               <text>{{item.shareContent}}</text>
             </view>
             <button class="cu-btn round bg-white button-hover noStyle margin-top-xs"

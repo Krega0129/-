@@ -17,9 +17,9 @@
       </view>
     </view>
   </view>
-  <view class=" margin-left">
+  <view class=" margin-lr">
     <view style="position:relative">
-      <view class="padding-top">
+      <view class="padding-top" style="word-break: break-word">
         <text>{{dynamicDetails.shareContentWhole}}</text>
       </view>
       <!-- <button class="cu-btn round bg-white button-hover noStyle margin-top-xs"
@@ -32,4 +32,4 @@
     </view>
   </view>
 </view>
-<view class="text-center text-gray" style="height:100rpx;line-height:100rpx" wx:if="{{!dynamicDetails.commentList.length}}">趁现在没人偷偷踩一脚吧!</view>
+<!-- <view class="text-center text-gray" style="height:100rpx;line-height:100rpx" wx:if="{{!dynamicDetails.commentList.length}}">趁现在没人偷偷踩一脚吧!</view> -->

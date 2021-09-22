@@ -1,1 +1,4 @@
 /* pages/LSK/sociality/releaseDynamic/releaseDynamic.wxss */
+.red {
+  color: red;
+}

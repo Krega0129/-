@@ -120,6 +120,10 @@ Page({
     this.setData({
       shareContent:shareContent
     })
+    if(this.data.shareContent.length > 150) {
+      showToast('文字长度超出限制',1000)
+      return
+    }
     wx.showModal({
       title: '发布动态',
       content: '确定发布此动态？',
@@ -128,7 +132,8 @@ Page({
       success: res => {
         if( this.data.imgList.length !== 0){
           this.upload(this, this.data.imgList) 
-        }else if(this.data.shareContent.length !== 0 && this.data.imgList.length === 0){
+        }
+        if(this.data.shareContent.length !== 0 && this.data.imgList.length === 0){
           addDynamic({
             userId,
             shareContent:this.data.shareContent,

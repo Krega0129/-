@@ -29,9 +29,9 @@
       </view>
     </view>
   </view>
-  <view class=" margin-left">
+  <view class=" margin-lr">
     <view style="position:relative">
-      <view class="padding-top">
+      <view class="padding-top" style="word-break: break-word">
         <text>{{dynamicDetails.shareContentWhole}}</text>
       </view>
       <!-- <button class="cu-btn round bg-white button-hover noStyle margin-top-xs"
@@ -62,9 +62,9 @@
           bindlongpress="sayTo" data-name="{{commentName}}">
           <view wx:for="{{dynamicDetails.commentList}}" wx:key="index" data-id="{{index}}">         
             <view class="padding-xs padding-tb-sm text-df">
-              <text class=" text-bold text-purple">{{item.nickName}}</text>
+              <text class=" text-bold text-purple" style="white-space:nowrap; text-overflow:ellipsis">{{item.nickName}}</text>
               <text decode="{{true}}">&nbsp;:&nbsp;</text>
-              <text>{{item.content}}</text>
+              <text style="word-break: break-word">{{item.content}}</text>
               <text decode="{{true}}">&nbsp;&nbsp;&nbsp;</text>
               <text class="text-xs text-gray" wx:if="{{item.userId===userId}}" data-id="{{item.commentId}}" data-index="{{index}}" catchtap="delete">删除</text>
             </view>
